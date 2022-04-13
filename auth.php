@@ -67,7 +67,10 @@ class auth_plugin_authplaincas extends DokuWiki_Auth_Plugin {
     }
 
     // allow the preloading to configure other user files
-    if( isset($config_cascade['plaincasauth.users']) && isset($config_cascade['plaincasauth.users']['default']) ) {
+	if (getenv("AUTHPLAINCAS_USERS")) {
+		$this->casuserfile = getenv("AUTHPLAINCAS_USERS");
+	}
+	elseif( isset($config_cascade['plaincasauth.users']) && isset($config_cascade['plaincasauth.users']['default']) ) {
       $this->casuserfile = $config_cascade['plaincasauth.users']['default'];
     }
     else {
